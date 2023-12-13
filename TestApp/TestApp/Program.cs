@@ -1,22 +1,46 @@
-﻿var numbers = new List<int>();
-int number;
+﻿var possibleDividers = new List<int>();
+var dividers = new List<int>();
+var primeNumbers = new List<int>();
 
-Console.WriteLine("Podaj 3 dowolne liczby całkowite: ");
+Console.WriteLine("Podaj liczbę całkowitą większą niż 1: ");
+var numberString = Console.ReadLine();
+var success = int.TryParse(numberString, out int number);
 
-do
+if (success && number > 1)
 {
-    Console.WriteLine("Podaj liczbę: ");
-    var numberString = Console.ReadLine();
-    var success = int.TryParse(numberString, out number );
-    if ( success )
+    for (int num = 2; num <= number; num++)
     {
-        numbers.Add( number );
+        var numSqrt = Math.Sqrt(num);
+        for (int j = 1; j <= numSqrt; j++)
+        {
+            possibleDividers.Add(j);
+        }
+
+        foreach (var i in possibleDividers)
+        {
+            if (num % i == 0)
+            {
+                dividers.Add(i);
+            }
+        }
+
+        if (dividers.Count == 1)
+        {
+            primeNumbers.Add(num);
+        }
+
+        possibleDividers.Clear();
+        dividers.Clear();
     }
-} while (numbers.Count < 3);
 
-Console.WriteLine("Właśnie wprowadziłeś 3 liczby.");
-
-var maxNumber = numbers.Max();
-
-Console.WriteLine(" ");
-Console.WriteLine("Największa liczba spośród podanych to: " + maxNumber.ToString());
+    Console.WriteLine(" ");
+    Console.WriteLine("Liczby pierwsze mniejsze lub równe " + number + " to:");
+    foreach (int i in primeNumbers)
+    {
+        Console.WriteLine(i);
+    }
+}
+else
+{
+    Console.WriteLine("Podano błędną liczbę");
+}
