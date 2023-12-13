@@ -19,4 +19,4 @@ Console.WriteLine("Właśnie wprowadziłeś 3 liczby.");
 var maxNumber = numbers.Max();
 
 Console.WriteLine(" ");
-Console.WriteLine("Największa liczba spośród podanych to: "+maxNumber.ToString());
+Console.WriteLine("Największa liczba spośród podanych to: " + maxNumber.ToString());
